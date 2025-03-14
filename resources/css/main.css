@@ -24,7 +24,7 @@
     @apply flex items-center;
 }
 .navbar-brand {
-    @apply me-6 lg:me-10 my-auto relative after:absolute after:content-[''] after:w-[6px] after:h-[6px] after:-right-2 after:bottom-2 after:rounded-full after:bg-persian-rose text-3xl;
+    @apply me-6 lg:me-10 my-auto after:absolute after:content-[''] after:w-[6px] after:h-[6px] after:-right-2 after:bottom-2 after:rounded-full after:bg-persian-rose text-2xl;
 }
 .nav-list {
     @apply fixed flex flex-col left-0 top-0 bg-white h-full z-10 w-[240px] pt-16 pb-10 px-3 shadow-nav lg:relative lg:bg-transparent lg:h-auto lg:flex-row lg:shadow-none lg:left-auto lg:top-auto lg:w-auto lg:pt-0 lg:pb-0 lg:px-0;
