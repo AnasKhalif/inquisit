@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @include('layouts.partials.link')
+    @vite('resources/css/app.css')
 </head>
 
 <body>
     <div class="main-wrapper">
-        @include('layouts.partials.navbar')
         <div class="page-content">
             <div class="container">
                 <div class="content-head">
                     <h3 class="content-head-title">Recap Question</h3>
-                    <button class="content-head-btn">Memulai</button>
+                    <a href="{{ route('participants.create') }}"
+                        class="content-head-btn bg-blue-500 text-white px-4 py-2 rounded">Memulai</a>
                 </div>
                 <div class="content-tab">
                     <div class="content-tab-head">

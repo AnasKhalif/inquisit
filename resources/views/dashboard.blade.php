@@ -578,3 +578,8 @@
         </div>
     </div>
 @endsection
+<script>
+    window.onload = function() {
+        sessionStorage.clear();
+    };
+</script>
