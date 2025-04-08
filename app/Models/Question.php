@@ -10,7 +10,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'pertanyaan', 'warna_teks', 'warna_display', 'kategori_soal'];
+    protected $fillable = ['category_id', 'pertanyaan', 'warna_teks', 'warna_display', 'kategori_soal', 'jawaban_benar'];
     protected $casts = [
         'kategori_soal' => 'string',
     ];

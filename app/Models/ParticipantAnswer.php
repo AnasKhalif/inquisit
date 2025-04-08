@@ -11,7 +11,7 @@ class ParticipantAnswer extends Model
 
     protected $fillable = ['participant_id', 'question_id', 'jawaban', 'benar_salah', 'waktu_respon'];
     protected $casts = [
-        'benar_salah' => 'boolean',
+        'benar_salah' => 'string',
     ];
 
     public function participant()

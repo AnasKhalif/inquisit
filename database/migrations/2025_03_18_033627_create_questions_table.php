@@ -17,7 +17,9 @@ return new class extends Migration
             $table->text('pertanyaan');
             $table->string('warna_teks')->nullable();
             $table->string('warna_display')->nullable();
-            $table->enum('kategori_soal', ['Congruent', 'Incongruent', 'Control'])->nullable();
+            $table->enum('kategori_soal', ['Congruent', 'Incongruent', 'Control', 'Mudah', 'Sedang', 'Sulit'])->nullable();
+            $table->enum('type', ['forward', 'backward'])->nullable();
+            $table->string('jawaban_benar')->nullable();
             $table->timestamps();
         });
     }

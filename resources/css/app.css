@@ -109,31 +109,6 @@
     @apply ms-2 text-davy-grey font-medium;
 }
 
-.content-tab-body {
-    @apply mt-5 grid xl:grid-cols-4 xl:gap-x-[24px];
-}
-.tab-body-block {
-    @apply bg-flash-white rounded-lg py-5 px-3;
-}
-.tab-body-list {
-    @apply grid md:grid-cols-2 lg:grid-cols-3 gap-x-4 xl:grid-cols-1 xl:gap-x-0;
-}
-.tab-body-item {
-    @apply rounded-lg bg-white shadow-tab-item p-4 border-solid border-[1px] border-black/5 mb-5 cursor-pointer hover:shadow-tab-item-hover transition-default hover:bg-sky-50;
-}
-.body-item-head {
-    @apply flex justify-between mb-6;
-}
-.body-item-head-title {
-    @apply text-gunmetal font-semibold text-xl opacity-90;
-}
-.body-item-head-btn {
-    @apply w-[28px] h-[28px] flex items-center justify-center rounded-md bg-white border-solid border-[1.5px] border-black/10 hover:bg-gunmetal transition-default;
-}
-.body-item-head-btn img {
-    @apply w-[16px];
-}
-
 .item-top {
     @apply flex items-center justify-between;
 }

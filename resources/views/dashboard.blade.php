@@ -1,580 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-tab-body">
-        <div class="tab-body-block">
-            <div class="body-item-head">
-                <h4 class="body-item-head-title">Research</h4>
-                <button class="body-item-head-btn group">
-                    <img src="../assets/icons/plus-icon-alt.svg" alt="" class="group-hover:invert">
-                </button>
-            </div>
-            <div class="tab-body-list">
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
+    <div class="mt-5 font-poppins">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            @foreach ($participants as $participant)
+                <div class="bg-white p-4 border border-black/5 mb-5 transition-all">
+                    <div class="item-top flex justify-between mb-6">
+                        <div class="item-top-title flex items-center">
+                            <p class="font-semibold text-gray-800">{{ $participant->name }}</p>
                         </div>
-                        <button class="item-top-btn">
+                        <button class="item-top-btn hover:bg-sky-50 hover:shadow-lg transition-all bg-white">
                             <img src="../assets/icons/dots-icon.svg" alt="">
                         </button>
                     </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
+                    <div class="item-body my-1">
+                        <p class="item-body-text py-3 mb-2 leading-[1.4] font-medium text-black/70 text-[15px]">
+                            Kategori tes yang dipilih:
+                            @foreach ($participant->choices as $choice)
+                                <span class="text-gray-600">{{ $choice->category->kategori }}</span>
+                                @if (!$loop->last)
+                                    ,
+                                @endif
+                            @endforeach
+                        </p>
+                        <div class="badge-group flex flex-wrap">
+                            @foreach ($participant->choices as $choice)
+                                <span
+                                    class="badge-brown bg-[#e9ecf2] text-brown text-[13px] font-bold py-1 inline-block rounded-md mr-[6px] mb-[6px] px-3">
+                                    {{ $choice->category->kategori }}
+                                </span>
+                            @endforeach
                         </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
+                        <div class="item-progress flex mt-6">
+                            <div class="progress-bar-item flex items-center">
+                                <div
+                                    class="progress-bar h-2 bg-[#e9ecf2] w-[80px] rounded-lg overflow-hidden flex items-stretch">
+                                    <div class="progress-fill bg-[#00796b]" style="width: {{ $participant->progress }}%">
+                                    </div>
                                 </div>
-                                <span class="progress-val">50%</span>
+                                <span
+                                    class="progress-val text-gray-500 text-xs font-bold ml-3">{{ $participant->progress }}%</span>
                             </div>
-                            <span class="badge-flash-white">2h 30m</span>
+                            <span class="badge-flash-white ml-4 text-sm">{{ $participant->choices->count() }} Kategori
+                                tes</span>
                         </div>
+
                     </div>
                 </div>
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-        <div class="tab-body-block">
-            <div class="body-item-head">
-                <h4 class="body-item-head-title">In Review</h4>
-                <button class="body-item-head-btn group">
-                    <img src="../assets/icons/plus-icon-alt.svg" alt="" class="group-hover:invert">
-                </button>
-            </div>
-            <div class="tab-body-list">
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-body-block">
-            <div class="body-item-head">
-                <h4 class="body-item-head-title">Development</h4>
-                <button class="body-item-head-btn group">
-                    <img src="../assets/icons/plus-icon-alt.svg" alt="" class="group-hover:invert">
-                </button>
-            </div>
-            <div class="tab-body-list">
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of tab item -->
-                <!-- tab item -->
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-body-block">
-            <div class="body-item-head">
-                <h4 class="body-item-head-title">Design</h4>
-                <button class="body-item-head-btn group">
-                    <img src="../assets/icons/plus-icon-alt.svg" alt="" class="group-hover:invert">
-                </button>
-            </div>
-            <div class="tab-body-list">
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of tab item -->
-                <!-- tab item -->
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-body-item">
-                    <div class="item-top">
-                        <div class="item-top-title">
-                            <div class="checkbox-wrapper">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </div>
-                            <p>Company Page</p>
-                        </div>
-                        <button class="item-top-btn">
-                            <img src="../assets/icons/dots-icon.svg" alt="">
-                        </button>
-                    </div>
-                    <div class="item-body">
-                        <p class="item-body-text">Improve the rendering of the page in the cart on
-                            mobile devices.</p>
-                        <div class="badge-group">
-                            <span class="badge-brown">Optimalization</span>
-                            <span class="badge-blue">New Project</span>
-                            <span class="badge-green">Design</span>
-                        </div>
-
-                        <div class="item-comments">
-                            <div class="item-avatar">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                                <img src="{{ asset('/assets/images/default-avatar.jpeg') }}" alt="">
-                            </div>
-                            <div class="item-comments-text">
-                                <p>14 Comments</p>
-                                <img src="../assets/icons/comment-icon.svg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="item-progress">
-                            <div class="progress-bar-item">
-                                <div class="progress-bar">
-                                    <div class="progress-fill"></div>
-                                </div>
-                                <span class="progress-val">50%</span>
-                            </div>
-                            <span class="badge-flash-white">2h 30m</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
@@ -582,4 +55,17 @@
     window.onload = function() {
         sessionStorage.clear();
     };
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            // Show the content again when pressing Esc
+            contentHeader.classList.remove('hidden');
+            contentTabs.classList.remove('hidden');
+            contentLeft.classList.remove('hidden');
+            contentRight.classList.remove('hidden');
+            contentHead.classList.remove('hidden');
+
+            // Update sessionStorage to false
+            sessionStorage.setItem('fullscreen', 'false');
+        }
+    });
 </script>

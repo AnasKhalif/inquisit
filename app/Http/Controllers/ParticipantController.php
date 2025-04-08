@@ -51,4 +51,18 @@ class ParticipantController extends Controller
             'categoryId' => $firstCategory->category_id
         ]);
     }
+
+    public function show($id)
+    {
+        $participant = Participant::with('choices.category')->findOrFail($id);
+        return view('participant.show', compact('participant'));
+    }
+
+    public function destroy($id)
+    {
+        $participant = Participant::findOrFail($id);
+        $participant->delete();
+
+        return redirect()->route('overview.index')->with('success', 'Peserta berhasil dihapus');
+    }
 }

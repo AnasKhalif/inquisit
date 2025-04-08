@@ -1,0 +1,352 @@
+{{-- <h2 class="text-2xl font-bold mb-4">Soal - {{ $category->kategori }}</h2>
+
+            <div class="text-4xl font-semibold">
+                @foreach ($digits as $digit)
+                    <p id="digit-{{ $loop->index }}" style="display:none;" class="digit">{{ $digit }}</p>
+                @endforeach
+            </div>
+
+            <form
+                action="{{ route('test.storeAnswer', ['participantId' => $participant->id, 'categoryId' => $category->id, 'questionId' => $currentQuestion->id]) }}"
+                method="POST" id="answer-form">
+                @csrf
+                <div class="mt-4 p-4 text-center">
+                    <p>Masukkan urutan angka yang ditampilkan sebelumnya:</p>
+                    <input type="text" name="answer" id="digit-answer" class="border p-2 text-lg mt-4" />
+                </div>
+                <input type="hidden" name="time_left" id="time_left" value="240">
+                <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg" style="display:none;">Kirim
+                    Jawaban</button>
+            </form>
+
+            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown">4:00</span></div> --}}
+
+            {{-- <script>
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                const countdownEl = document.getElementById('countdown');
+                const timeLeftInput = document.getElementById('time_left');
+                let digitIndex = 0;
+
+                function updateCountdown() {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    countdownEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timeLeftInput.value = timeLeft;
+                        sessionStorage.setItem('remainingTime', timeLeft);
+                        setTimeout(updateCountdown, 1000);
+                    } else {
+                        document.querySelector("form").submit();
+                    }
+                }
+
+                function showDigit() {
+                    if (digitIndex < {{ count($digits) }}) {
+                        document.getElementById('digit-' + digitIndex).style.display = 'block';
+                        setTimeout(function() {
+                            document.getElementById('digit-' + digitIndex).style.display = 'none';
+                            digitIndex++;
+                            showDigit();
+                        }, 1000);
+                    } else {
+                        document.querySelector('form').style.display =
+                            'block'; // Menampilkan form input setelah angka selesai ditampilkan
+                    }
+                }
+
+                showDigit(); // Memulai tampilan angka-angka
+
+                updateCountdown(); // Memulai countdown timer
+            </script> --}}
+            {{-- <script>
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                const countdownEl = document.getElementById('countdown');
+                const timeLeftInput = document.getElementById('time_left');
+                let digitIndex = 0;
+                let countdownInterval;
+
+                function updateCountdown() {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    countdownEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timeLeftInput.value = timeLeft;
+                        sessionStorage.setItem('remainingTime', timeLeft);
+                        countdownInterval = setTimeout(updateCountdown, 1000);
+                    } else {
+                        document.querySelector("form").submit();
+                    }
+                }
+
+                function showDigit() {
+                    if (digitIndex < {{ count($digits) }}) {
+                        document.getElementById('digit-' + digitIndex).style.display = 'block';
+                        setTimeout(function() {
+                            document.getElementById('digit-' + digitIndex).style.display = 'none';
+                            digitIndex++;
+                            if (digitIndex < {{ count($digits) }}) {
+                                showDigit(); // Tampilkan digit berikutnya
+                            } else {
+                                document.querySelector('form').style.display =
+                                    'block'; // Menampilkan form input setelah semua digit selesai
+                                updateCountdown(); // Mulai countdown setelah semua digit ditampilkan
+                            }
+                        }, 1000); // Tampilkan setiap digit selama 1 detik
+                    }
+                }
+
+                showDigit(); // Memulai tampilan angka-angka
+            </script> --}}
+
+
+
+
+
+<h2 class="text-2xl font-bold mb-4">Soal - {{ $category->kategori }}</h2>
+
+            <div class="text-4xl font-semibold">
+                @foreach ($digits as $digit)
+                    <p id="digit-{{ $loop->index }}" style="display:none;" class="digit">{{ $digit }}</p>
+                @endforeach
+            </div>
+
+            <form
+                action="{{ route('test.storeAnswer', ['participantId' => $participant->id, 'categoryId' => $category->id, 'questionId' => $currentQuestion->id]) }}"
+                method="POST" id="answer-form" style="display:none;">
+                @csrf
+                <div class="mt-4 p-4 text-center">
+                    <p>Masukkan urutan angka yang ditampilkan sebelumnya:</p>
+                    <input type="text" name="answer" id="digit-answer" class="border p-2 text-lg mt-4" />
+                </div>
+                <input type="hidden" name="time_left" id="time_left" value="240">
+                <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg">Kirim Jawaban</button>
+            </form>
+
+            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown">4:00</span></div>
+
+            <script>
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                const countdownEl = document.getElementById('countdown');
+                const timeLeftInput = document.getElementById('time_left');
+                let digitIndex = 0;
+                let countdownInterval;
+
+                function updateCountdown() {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    countdownEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timeLeftInput.value = timeLeft;
+                        sessionStorage.setItem('remainingTime', timeLeft);
+                        countdownInterval = setTimeout(updateCountdown, 1000);
+                    } else {
+                        document.querySelector("form").submit();
+                    }
+                }
+
+                function showDigit() {
+                    if (digitIndex < {{ count($digits) }}) {
+                        document.getElementById('digit-' + digitIndex).style.display = 'block';
+                        setTimeout(function() {
+                            document.getElementById('digit-' + digitIndex).style.display = 'none';
+                            digitIndex++;
+                            if (digitIndex < {{ count($digits) }}) {
+                                showDigit(); // Tampilkan digit berikutnya
+                            } else {
+                                // Setelah semua digit selesai, tampilkan form
+                                document.querySelector('form').style.display = 'block';
+                                updateCountdown(); // Mulai countdown setelah semua digit ditampilkan
+                            }
+                        }, 1000); // Tampilkan setiap digit selama 1 detik
+                    }
+                }
+
+                showDigit(); // Mulai tampilan angka-angka
+            </script>
+
+
+
+{{-- @elseif($category->id == 3)
+            <h2 class="text-2xl font-bold mb-4">Soal - {{ $category->kategori }}</h2>
+
+            @if ($currentQuestion->type == 'forward')
+                <p class="text-lg">Instruksi:</p>
+                <p class="text-lg">Anda akan melihat urutan angka yang muncul secara berurutan. Tugas Anda adalah memasukkan
+                    urutan angka tersebut dengan mengikuti urutan yang benar.</p>
+            @elseif ($currentQuestion->type == 'backward')
+                <p class="text-lg">Instruksi:</p>
+                <p class="text-lg">Anda akan melihat urutan angka yang muncul secara berurutan. Tugas Anda adalah memasukkan
+                    urutan angka tersebut dengan urutan yang terbalik.</p>
+            @endif
+
+            <div class="text-4xl font-semibold">
+                @foreach ($digits as $digit)
+                    <p id="digit-{{ $loop->index }}" style="display:none;" class="digit text-9xl">{{ $digit }}
+                    </p>
+                @endforeach
+            </div>
+
+            <form
+                action="{{ route('test.storeAnswer', ['participantId' => $participant->id, 'categoryId' => $category->id, 'questionId' => $currentQuestion->id]) }}"
+                method="POST" id="answer-form" style="display:none;">
+                @csrf
+                <div class="mt-4 p-4 text-center">
+                    <p>Masukkan urutan angka yang ditampilkan sebelumnya:</p>
+
+                    <div id="display-answer" class="mt-4 text-6xl font-bold"></div>
+
+                    <div id="calculator"
+                        class="grid grid-cols-5 gap-4 mt-4 justify-center items-center max-w-[500px] mx-auto">
+                        @for ($i = 1; $i <= 9; $i++)
+                            <button type="button"
+                                class="calc-button bg-black text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out"
+                                data-value="{{ $i }}">{{ $i }}</button>
+                        @endfor
+                        <button type="button" id="delete-button"
+                            class="bg-red-600 text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out">
+                            Del
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="answer" id="digit-answer" />
+                </div>
+
+                <input type="hidden" name="time_left" id="time_left" value="240">
+                <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg">Kirim Jawaban</button>
+            </form>
+
+            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown">4:00</span></div>
+
+            <script>
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                const countdownEl = document.getElementById('countdown');
+                const timeLeftInput = document.getElementById('time_left');
+                let digitIndex = 0;
+                let countdownInterval;
+                let answer = '';
+
+                function updateCountdown() {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    countdownEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timeLeftInput.value = timeLeft;
+                        sessionStorage.setItem('remainingTime', timeLeft);
+                        countdownInterval = setTimeout(updateCountdown, 1000);
+                    } else {
+                        document.querySelector("form").submit();
+                    }
+                }
+
+                function showDigit() {
+                    if (digitIndex < {{ count($digits) }}) {
+                        document.getElementById('digit-' + digitIndex).style.display = 'block';
+                        setTimeout(function() {
+                            document.getElementById('digit-' + digitIndex).style.display = 'none';
+                            digitIndex++;
+                            if (digitIndex < {{ count($digits) }}) {
+                                showDigit();
+                            } else {
+                                document.querySelector('form').style.display = 'block';
+                                updateCountdown();
+                            }
+                        }, 1000);
+                    }
+                }
+
+                document.querySelectorAll('.calc-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        answer += this.getAttribute('data-value');
+                        document.getElementById('display-answer').innerText = answer;
+                        document.getElementById('digit-answer').value =
+                            answer;
+                    });
+                });
+
+                document.getElementById('delete-button').addEventListener('click', function() {
+                    answer = answer.slice(0, -1);
+                    document.getElementById('display-answer').innerText = answer;
+                    document.getElementById('digit-answer').value = answer;
+                });
+
+                showDigit();
+            </script>
+        @endif --}}
+
+
+
+
+
+
+
+{{-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @include('layouts.partials.link')
+    @vite('resources/css/app.css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <div class="page-content">
+            <div class="container">
+                <div class="content-head">
+                    <h3 class="content-head-title">
+                        @if (request()->routeIs('dashboard'))
+                            Tasks
+                        @elseif(request()->routeIs('overview.index'))
+                            Overview
+                        @endif
+                    </h3>
+                    <a href="{{ route('participants.create') }}"
+                        class="content-head-btn bg-blue-500 text-white px-4 py-2 rounded">Memulai</a>
+                </div>
+                <div class="content-tab">
+                    <div class="content-tab-head">
+                        <div class="tab-l">
+                            <ul class="tab-btns">
+                                <li class="tab-btn-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                                    <a href="{{ route('dashboard') }}" class="tab-btn-link">Tasks</a>
+                                </li>
+                                <li class="tab-btn-item {{ request()->routeIs('overview.index') ? 'active' : '' }}">
+                                    <a href="{{ route('overview.index') }}" class="tab-btn-link">Overview</a>
+                                </li>
+                                <li class="tab-btn-item">
+                                    <button class="tab-btn-link" type="button">Files</button>
+                                </li>
+                                <li class="tab-btn-item">
+                                    <button class="tab-btn-link" type="button">Time</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-r">
+                            <button class="tab-r-btn">
+                                <img src="{{ asset('/assets/icons/maximize-icon.svg') }}" class="tab-r-btn-icon"
+                                    alt="">
+                                <span class="tab-r-btn-text">Full screens</span>
+                            </button>
+                        </div>
+                    </div>
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> --}}
