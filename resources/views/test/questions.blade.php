@@ -31,15 +31,17 @@
 
                 <input type="hidden" name="answer" id="color-answer" value="">
 
-                <input type="hidden" name="time_left" id="time_left" value="240">
+                <input type="hidden" name="time_left" id="time_left" value="{{ $timeLeft }}">
                 <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg" style="display:none;">Kirim
                     Jawaban</button>
             </form>
 
-            <div class="text-xl font-semibold text-red-500 mt-6">Sisa Waktu: <span id="countdown">4:00</span></div>
+            <div class="text-xl font-semibold text-red-500 mt-6">Sisa Waktu: <span id="countdown"></span></div>
 
             <script>
-                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                // let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) :
+                    {{ $timeLeft }};
                 const countdownEl = document.getElementById('countdown');
                 const timeLeftInput = document.getElementById('time_left');
 
@@ -111,15 +113,17 @@
                 </div>
 
                 <input type="hidden" name="answer" id="true-false-answer" value="">
-                <input type="hidden" name="time_left" id="time_left" value="240">
+                <input type="hidden" name="time_left" id="time_left" value="{{ $timeLeft }}">
                 <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg" style="display:none;">Kirim
                     Jawaban</button>
             </form>
 
-            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown">4:00</span></div>
+            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown"></span></div>
 
             <script>
-                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                // let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) :
+                    {{ $timeLeft }};
                 const countdownEl = document.getElementById('countdown');
                 const timeLeftInput = document.getElementById('time_left');
 
@@ -218,14 +222,16 @@
                     <input type="hidden" name="answer" id="digit-answer" />
                 </div>
 
-                <input type="hidden" name="time_left" id="time_left" value="240">
+                <input type="hidden" name="time_left" id="time_left" value="{{ $timeLeft }}">
                 <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg">Kirim Jawaban</button>
             </form>
 
-            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown">4:00</span></div>
+            <div class="text-lg font-bold text-red-500 mt-6">Sisa Waktu: <span id="countdown"></span></div>
 
             <script>
-                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                // let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) : 240;
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) :
+                    {{ $timeLeft }};
                 const countdownEl = document.getElementById('countdown');
                 const timeLeftInput = document.getElementById('time_left');
                 let digitIndex = 0;

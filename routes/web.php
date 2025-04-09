@@ -26,3 +26,9 @@ Route::get('/test/questions/{participantId}/{categoryId}/{questionId?}', [TestCo
 Route::post('/test/storeAnswer/{participantId}/{categoryId}/{questionId}', [TestController::class, 'storeAnswer'])->name('test.storeAnswer');
 Route::get('/test/relax/{participantId}/{categoryId}', [TestController::class, 'relax'])->name('test.relax');
 Route::get('/test/instructions/type/{participantId}/{categoryId}/{questionId}', [TestController::class, 'instructionsType'])->name('test.instructionsType');
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+// Route untuk mengedit kategori
+Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');

@@ -66,6 +66,22 @@ class OverviewController extends Controller
             $query->where('category_id', $categoryId);
         })->get();
 
+        $previousTime = null;
+
+        // Menghitung selisih waktu respon
+        foreach ($answers as $key => $answer) {
+            if ($previousTime === null) {
+                // Jawaban pertama, set timeDifference dengan waktu respon pertama
+                $answer->timeDifference = $answer->waktu_respon;
+            } else {
+                // Selisih antara waktu jawaban sekarang dan jawaban sebelumnya
+                $answer->timeDifference = $answer->waktu_respon - $previousTime;
+            }
+
+            // Update previousTime untuk perhitungan selanjutnya
+            $previousTime = $answer->waktu_respon;
+        }
+
 
         return view('overview.categoryDetails', compact('category', 'participant', 'answers'));
     }

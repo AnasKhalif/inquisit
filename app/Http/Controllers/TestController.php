@@ -16,16 +16,20 @@ class TestController extends Controller
         $participant = Participant::findOrFail($participantId);
         $categories = ParticipantChoice::where('participant_id', $participantId)
             ->join('categories', 'participant_choices.category_id', '=', 'categories.id')
-            ->select('categories.id', 'categories.kategori')
+            ->select('categories.id', 'categories.kategori', 'categories.waktu')
             ->get();
 
         if ($categories->isEmpty()) {
             return redirect()->route('dashboard')->with('error', 'Peserta tidak memiliki kategori soal.');
         }
 
+        $category = $categories->first();
+        $timeLeft = $category->waktu;
+
         return redirect()->route('test.instructions', [
             'participantId' => $participant->id,
-            'categoryId' => $categories->first()->id
+            'categoryId' => $categories->first()->id,
+            'timeLeft' => $timeLeft,
         ]);
     }
 
@@ -50,22 +54,32 @@ class TestController extends Controller
 
         $currentQuestion = Question::findOrFail($questionId);
 
+        $timeLeft = $category->waktu;
+
         if ($categoryId == 3) {
             $digits = explode(' ', $currentQuestion->pertanyaan);
-            return view('test.questions', compact('participant', 'category', 'questions', 'currentQuestion', 'digits'));
+            return view('test.questions', compact('participant', 'category', 'questions', 'currentQuestion', 'digits', 'timeLeft'));
         }
 
-        return view('test.questions', compact('participant', 'category', 'questions', 'currentQuestion'));
+        return view('test.questions', compact('participant', 'category', 'questions', 'currentQuestion', 'timeLeft'));
     }
 
 
     public function storeAnswer(Request $request, $participantId, $categoryId, $questionId)
     {
         $request->validate([
-            'answer' => 'required|string'
+            'answer' => 'required|string',
+            'time_left' => 'required|integer|min:0',
         ]);
 
         $question = Question::findOrFail($questionId);
+        $category = Category::findOrFail($categoryId);
+
+        $initialTime = $category->waktu;
+        $timeLeft = $request->input('time_left');
+
+        $timeSpent = $initialTime - $timeLeft;
+        $timeSpent = max(0, min($initialTime, $timeSpent));
 
         // Simpan jawaban
         ParticipantAnswer::create([
@@ -73,7 +87,7 @@ class TestController extends Controller
             'question_id' => $questionId,
             'jawaban' => $request->answer,
             'benar_salah' => $this->checkAnswer($question, $request->answer),  // Cek apakah jawaban benar
-            'waktu_respon' => 240 - $request->input('time_left', 240),  // Waktu yang digunakan
+            'waktu_respon' => $timeSpent,  // Waktu yang digunakan
         ]);
 
         // Ambil soal berikutnya

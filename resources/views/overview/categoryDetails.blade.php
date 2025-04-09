@@ -26,6 +26,7 @@
                     @endif
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Jawaban</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Waktu Respon (detik)</th>
+                    <!-- Add this column -->
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Benar/Salah</th>
                 </tr>
             </thead>
@@ -43,13 +44,19 @@
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->question->type }}</td>
                         @endif
                         <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->jawaban }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->waktu_respon }}</td>
                         <td class="px-6 py-4 text-sm text-gray-800">
-                            {{ $answer->benar_salah }}</td>
+                            @if (isset($answer->timeDifference))
+                                {{ $answer->timeDifference }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->benar_salah }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
     </div>
     <script>
         document.addEventListener('keydown', function(event) {

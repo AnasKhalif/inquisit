@@ -32,6 +32,10 @@
                             Detail Peserta
                         @elseif(request()->routeIs('overview.categoryDetails'))
                             Jawaban Peserta
+                        @elseif(request()->routeIs('categories.index'))
+                            Waktu Kategori
+                        @elseif(request()->routeIs('categories.edit'))
+                            Edit Waktu Kategori
                         @endif
                     </h3>
                     <a href="{{ route('participants.create') }}"
@@ -48,8 +52,8 @@
                                 <li class="tab-btn-item {{ request()->routeIs('overview.index') ? 'active' : '' }}">
                                     <a href="{{ route('overview.index') }}" class="tab-btn-link">Overview</a>
                                 </li>
-                                <li class="tab-btn-item">
-                                    <button class="tab-btn-link" type="button">Time</button>
+                                <li class="tab-btn-item {{ request()->routeIs('categories.index') ? 'active' : '' }}">
+                                    <a class="tab-btn-link" href="{{ route('categories.index') }}">Time</a>
                                 </li>
                                 <li class="tab-btn-item">
                                     <button class="tab-btn-link" type="button">Files</button>

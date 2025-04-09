@@ -50,18 +50,18 @@ class QuestionSeeder extends Seeder
             ['category_id' => 1, 'pertanyaan' => 'MERAH', 'warna_teks' => 'biru', 'warna_display' => 'text-sky-500', 'kategori_soal' => 'Incongruent', 'type' => null, 'jawaban_benar' => null],
 
             // Control
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'merah', 'warna_display' => 'bg-red-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'merah', 'warna_display' => 'bg-red-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'merah', 'warna_display' => 'bg-red-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'hijau', 'warna_display' => 'bg-green', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'hijau', 'warna_display' => 'bg-green', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'hijau', 'warna_display' => 'bg-green', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'biru', 'warna_display' => 'bg-sky-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'biru', 'warna_display' => 'bg-sky-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'biru', 'warna_display' => 'bg-sky-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'hitam', 'warna_display' => 'bg-black', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'hitam', 'warna_display' => 'bg-black', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
-            ['category_id' => 1, 'pertanyaan' => null, 'warna_teks' => 'hitam', 'warna_display' => 'bg-black', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'merah', 'warna_display' => 'bg-red-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'merah', 'warna_display' => 'bg-red-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'merah', 'warna_display' => 'bg-red-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'hijau', 'warna_display' => 'bg-green', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'hijau', 'warna_display' => 'bg-green', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'hijau', 'warna_display' => 'bg-green', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'biru', 'warna_display' => 'bg-sky-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'biru', 'warna_display' => 'bg-sky-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'biru', 'warna_display' => 'bg-sky-500', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'hitam', 'warna_display' => 'bg-black', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'hitam', 'warna_display' => 'bg-black', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
+            ['category_id' => 1, 'pertanyaan' => '', 'warna_teks' => 'hitam', 'warna_display' => 'bg-black', 'kategori_soal' => 'Control', 'type' => null, 'jawaban_benar' => null],
         ];
 
         shuffle($questions);

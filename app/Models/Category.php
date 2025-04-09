@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['kategori', 'deskripsi'];
+    protected $fillable = ['kategori', 'deskripsi', 'waktu'];
 
     public function participantChoices()
     {
