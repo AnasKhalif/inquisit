@@ -17,6 +17,7 @@ class CategorySeeder extends Seeder
             ['kategori' => 'Color Word', 'deskripsi' => 'Tes stroop untuk warna'],
             ['kategori' => 'Aritmatika', 'deskripsi' => 'Soal perhitungan angka'],
             ['kategori' => 'Digit Span', 'deskripsi' => 'Tes daya ingat angka'],
+            ['kategori' => 'Mental Stress', 'deskripsi' => 'Tes stres mental'],
         ]);
     }
 }

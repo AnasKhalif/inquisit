@@ -37,16 +37,23 @@
     <table>
         <thead>
             <tr>
-                <th>Nama Peserta</th>
+                <th>Nama </th>
                 <th>Pertanyaan</th>
-                @if ($category->kategori !== 'Digit Span')
+                @if ($category->kategori == 'Mental Stress')
+                    <th>Level</th>
+                    <th>Phase</th>
+                @endif
+                @if ($category->kategori !== 'Digit Span' && $category->kategori !== 'Mental Stress')
                     <th>Kategori Soal</th>
                 @endif
-                @if ($category->kategori !== 'Color Word' && $category->kategori !== 'Aritmatika')
+                @if (
+                    $category->kategori !== 'Color Word' &&
+                        $category->kategori !== 'Aritmatika' &&
+                        $category->kategori !== 'Mental Stress')
                     <th>Tipe Soal</th>
                 @endif
                 <th>Jawaban</th>
-                <th>Waktu Respon (detik)</th>
+                <th>Waktu (detik)</th>
                 <th>Benar/Salah</th>
             </tr>
         </thead>
@@ -54,16 +61,30 @@
             @foreach ($answers as $answer)
                 <tr>
                     <td>{{ $participant->name }}</td>
-                    <td>{{ $category->kategori === 'Color Word' && empty($answer->question->pertanyaan) ? 'BLOCK' : $answer->question->pertanyaan }}
+                    <td>
+                        {{ $category->kategori === 'Color Word' && empty($answer->question->pertanyaan) ? 'BLOCK' : $answer->question->pertanyaan }}
                     </td>
-                    @if ($category->kategori !== 'Digit Span')
+                    @if ($category->kategori == 'Mental Stress')
+                        <td>{{ $answer->question->level }}</td>
+                        <td>{{ $answer->question->phase }}</td>
+                    @endif
+                    @if ($category->kategori !== 'Digit Span' && $category->kategori !== 'Mental Stress')
                         <td>{{ $answer->question->kategori_soal }}</td>
                     @endif
-                    @if ($category->kategori !== 'Color Word' && $category->kategori !== 'Aritmatika')
+                    @if (
+                        $category->kategori !== 'Color Word' &&
+                            $category->kategori !== 'Aritmatika' &&
+                            $category->kategori !== 'Mental Stress')
                         <td>{{ $answer->question->type }}</td>
                     @endif
                     <td>{{ $answer->jawaban }}</td>
-                    <td>{{ $answer->waktu_respon }}</td>
+                    <td>
+                        @if (isset($answer->timeDifference))
+                            {{ $answer->timeDifference < 0 ? 0 : $answer->timeDifference }}
+                        @else
+                            N/A
+                        @endif
+                    </td>
                     <td>{{ $answer->benar_salah }}</td>
                 </tr>
             @endforeach

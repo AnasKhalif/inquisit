@@ -20,6 +20,8 @@ return new class extends Migration
             $table->enum('kategori_soal', ['Congruent', 'Incongruent', 'Control', 'Mudah', 'Sedang', 'Sulit'])->nullable();
             $table->enum('type', ['forward', 'backward'])->nullable();
             $table->string('jawaban_benar')->nullable();
+            $table->integer('level')->nullable();
+            $table->enum('phase', ['training', 'experimental', 'control'])->nullable();
             $table->timestamps();
         });
     }

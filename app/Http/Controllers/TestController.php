@@ -54,7 +54,17 @@ class TestController extends Controller
 
         $currentQuestion = Question::findOrFail($questionId);
 
-        $timeLeft = $category->waktu;
+        if ($category->id == 4 && $currentQuestion->phase == 'experimental') {
+            // Untuk fase eksperimental, ambil waktu dari kategori Aritmatika
+            $timeLeft = $category->waktu;
+        } else if ($category->id == 4 && $currentQuestion->phase == 'control') {
+            $timeLeft = 0;
+        } else if ($category->id == 4 && $currentQuestion->phase == 'training') {
+            $timeLeft = 0;
+        } else {
+            // Untuk fase training atau control, tidak perlu waktu
+            $timeLeft = $category->waktu;
+        }
 
         if ($categoryId == 3) {
             $digits = explode(' ', $currentQuestion->pertanyaan);
@@ -76,10 +86,18 @@ class TestController extends Controller
         $category = Category::findOrFail($categoryId);
 
         $initialTime = $category->waktu;
-        $timeLeft = $request->input('time_left');
+        // $timeLeft = $request->input('time_left');
 
-        $timeSpent = $initialTime - $timeLeft;
-        $timeSpent = max(0, min($initialTime, $timeSpent));
+        // $timeSpent = $initialTime - $timeLeft;
+        // $timeSpent = max(0, min($initialTime, $timeSpent));
+        if ($question->phase == 'training' || $question->phase == 'control') {
+            // Jika fase Training atau Control, waktu respon di-set ke 0
+            $timeSpent = 0;
+        } else {
+            // Jika fase Eksperimental, waktu yang tersisa dikurangi
+            $timeSpent = $initialTime - $request->input('time_left');
+            $timeSpent = max(0, min($initialTime, $timeSpent)); // Pastikan waktu tidak negatif
+        }
 
         // Simpan jawaban
         ParticipantAnswer::create([
@@ -108,7 +126,6 @@ class TestController extends Controller
             ]);
         }
     }
-
 
     private function checkAnswer($question, $answer)
     {
@@ -141,6 +158,11 @@ class TestController extends Controller
                 }
                 return 'salah';
             }
+        } else if ($question->category_id == 4) {
+            if (strtolower($answer) == $question->jawaban_benar) {
+                return 'benar';
+            }
+            return 'salah';
         }
     }
 

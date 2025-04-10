@@ -18,10 +18,19 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Nama Peserta</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Pertanyaan</th>
-                    @if ($category->kategori !== 'Digit Span')
+                    @if ($category->kategori == 'Mental Stress')
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Level</th>
+                    @endif
+                    @if ($category->kategori == 'Mental Stress')
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Phase</th>
+                    @endif
+                    @if ($category->kategori !== 'Digit Span' && $category->kategori !== 'Mental Stress')
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Kategori Soal</th>
                     @endif
-                    @if ($category->kategori !== 'Color Word' && $category->kategori !== 'Aritmatika')
+                    @if (
+                        $category->kategori !== 'Color Word' &&
+                            $category->kategori !== 'Aritmatika' &&
+                            $category->kategori !== 'Mental Stress')
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Tipe Soal</th>
                     @endif
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Jawaban</th>
@@ -37,16 +46,26 @@
                         <td class="px-6 py-4 text-sm text-gray-800">
                             {{ $category->kategori === 'Color Word' && empty($answer->question->pertanyaan) ? 'BLOCK' : $answer->question->pertanyaan }}
                         </td>
-                        @if ($category->kategori !== 'Digit Span')
+                        @if ($category->kategori == 'Mental Stress')
+                            <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->question->level }}</td>
+                        @endif
+                        @if ($category->kategori == 'Mental Stress')
+                            <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">{{ $answer->question->phase }}
+                            </th>
+                        @endif
+                        @if ($category->kategori !== 'Digit Span' && $category->kategori !== 'Mental Stress')
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->question->kategori_soal }}</td>
                         @endif
-                        @if ($category->kategori !== 'Color Word' && $category->kategori !== 'Aritmatika')
+                        @if (
+                            $category->kategori !== 'Color Word' &&
+                                $category->kategori !== 'Aritmatika' &&
+                                $category->kategori !== 'Mental Stress')
                             <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->question->type }}</td>
                         @endif
                         <td class="px-6 py-4 text-sm text-gray-800">{{ $answer->jawaban }}</td>
                         <td class="px-6 py-4 text-sm text-gray-800">
                             @if (isset($answer->timeDifference))
-                                {{ $answer->timeDifference }}
+                                {{ $answer->timeDifference < 0 ? 0 : $answer->timeDifference }}
                             @else
                                 N/A
                             @endif

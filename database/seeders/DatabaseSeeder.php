@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             QuestionSeeder::class,
             ArithmeticSeeder::class,
             DigitSpanSeeder::class,
+            MentalStressSeeder::class,
         ]);
     }
 }

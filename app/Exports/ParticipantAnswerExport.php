@@ -41,11 +41,16 @@ class ParticipantAnswerExport implements FromCollection, WithHeadings, WithMappi
             'Benar/Salah',
         ];
 
-        if ($this->category->kategori !== 'Digit Span') {
+        if ($this->category->kategori == 'Mental Stress') {
+            $headings[] = 'Level';
+            $headings[] = 'Phase';
+        }
+
+        if ($this->category->kategori !== 'Digit Span' && $this->category->kategori !== 'Mental Stress') {
             $headings[] = 'Kategori Soal';
         }
 
-        if ($this->category->kategori !== 'Color Word' && $this->category->kategori !== 'Aritmatika') {
+        if ($this->category->kategori !== 'Color Word' && $this->category->kategori !== 'Aritmatika' && $this->category->kategori !== 'Mental Stress') {
             $headings[] = 'Tipe Soal';
         }
 
@@ -62,11 +67,16 @@ class ParticipantAnswerExport implements FromCollection, WithHeadings, WithMappi
             $answer->benar_salah,
         ];
 
-        if ($this->category->kategori !== 'Digit Span') {
+        if ($this->category->kategori == 'Mental Stress') {
+            $data[] = $answer->question->level;
+            $data[] = $answer->question->phase;
+        }
+
+        if ($this->category->kategori !== 'Digit Span' && $this->category->kategori !== 'Mental Stress') {
             $data[] = $answer->question->kategori_soal;
         }
 
-        if ($this->category->kategori !== 'Color Word' && $this->category->kategori !== 'Aritmatika') {
+        if ($this->category->kategori !== 'Color Word' && $this->category->kategori !== 'Aritmatika' && $this->category->kategori !== 'Mental Stress') {
             $data[] = $answer->question->type ?: 'N/A';
         }
 

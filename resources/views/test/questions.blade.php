@@ -286,6 +286,159 @@
 
                 showDigit();
             </script>
+            {{-- @elseif($category->id == 4)
+            <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">Soal - {{ $category->kategori }} - Phase:
+                {{ ucfirst($currentQuestion->phase) }}</h2>
+
+            <div class="mt-4 p-4 text-center">
+                <p id="question-text" class="text-4xl font-semibold">{{ $currentQuestion->pertanyaan }}</p>
+                <div id="feedback" class="text-lg font-bold mt-4"></div>
+            </div>
+
+            <form
+                action="{{ route('test.storeAnswer', ['participantId' => $participant->id, 'categoryId' => $category->id, 'questionId' => $currentQuestion->id]) }}"
+                method="POST" id="answer-form">
+                @csrf
+                <div class="text-center">
+
+                    <div id="display-answer" class="text-6xl font-bold text-center">
+                    </div>
+
+                    <div id="calculator"
+                        class="grid grid-cols-5 gap-4 mt-6 justify-center items-center max-w-[500px] mx-auto">
+                        @for ($i = 1; $i <= 9; $i++)
+                            <button type="button"
+                                class="calc-button bg-black text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out"
+                                data-value="{{ $i }}">{{ $i }}</button>
+                        @endfor
+                        <button type="button" id="delete-button"
+                            class="bg-red-600 text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out">
+                            Del
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="answer" id="digit-answer" />
+                </div>
+
+                <input type="hidden" name="time_left" id="time_left" value="{{ $timeLeft }}">
+                <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg">Kirim Jawaban</button>
+            </form>
+
+
+            <script>
+                let answer = '';
+                document.querySelectorAll('.calc-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        answer += this.getAttribute('data-value');
+                        document.getElementById('display-answer').innerText = answer;
+                        document.getElementById('digit-answer').value =
+                            answer;
+                    });
+                });
+
+                document.getElementById('delete-button').addEventListener('click', function() {
+                    answer = answer.slice(0, -1);
+                    document.getElementById('display-answer').innerText = answer;
+                    document.getElementById('digit-answer').value = answer;
+                });
+            </script>
+        @endif --}}
+        @elseif($category->id == 4)
+            <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">
+                Soal - {{ $category->kategori }} - Phase: {{ ucfirst($currentQuestion->phase) }}
+            </h2>
+
+            <div class="mt-4 p-4 text-center">
+                <p id="question-text" class="text-4xl font-semibold">{{ $currentQuestion->pertanyaan }}</p>
+                <div id="feedback" class="text-lg font-bold mt-4"></div>
+            </div>
+
+            <form
+                action="{{ route('test.storeAnswer', ['participantId' => $participant->id, 'categoryId' => $category->id, 'questionId' => $currentQuestion->id]) }}"
+                method="POST" id="answer-form">
+                @csrf
+                <div class="text-center">
+                    <div id="display-answer" class="text-6xl font-bold text-center">
+                        <!-- Digits input will be displayed here -->
+                    </div>
+
+                    <!-- Calculator buttons -->
+                    <div id="calculator"
+                        class="grid grid-cols-5 gap-4 mt-6 justify-center items-center max-w-[500px] mx-auto">
+                        @for ($i = 1; $i <= 9; $i++)
+                            <button type="button"
+                                class="calc-button bg-black text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out"
+                                data-value="{{ $i }}">{{ $i }}</button>
+                        @endfor
+                        <button type="button" id="delete-button"
+                            class="bg-red-600 text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out">
+                            Del
+                        </button>
+                    </div>
+
+                    <!-- Hidden input for storing the user's answer -->
+                    <input type="hidden" name="answer" id="digit-answer" />
+                </div>
+
+                <!-- Hidden time_left input -->
+                <input type="hidden" name="time_left" id="time_left" value="{{ $timeLeft }}">
+
+                <!-- Submit button -->
+                <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg">Kirim Jawaban</button>
+            </form>
+
+            <!-- Display countdown if timeLeft exists (only for phase 'experimental') -->
+            @if ($timeLeft)
+                <div class="text-xl font-semibold text-red-500 mt-6">Sisa Waktu: <span id="countdown"></span></div>
+            @endif
+
+            <script>
+                let answer = '';
+                let timeLeft = sessionStorage.getItem('remainingTime') ? parseInt(sessionStorage.getItem('remainingTime')) :
+                    {{ $timeLeft }};
+                const countdownEl = document.getElementById('countdown');
+                const timeLeftInput = document.getElementById('time_left');
+
+                // Function to update the countdown timer
+                function updateCountdown() {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    countdownEl.innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timeLeftInput.value = timeLeft;
+                        sessionStorage.setItem('remainingTime', timeLeft);
+                        setTimeout(updateCountdown, 1000);
+                    } else {
+                        document.querySelector("form").submit();
+                    }
+                }
+
+                // Handling digit input for the calculator
+                document.querySelectorAll('.calc-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        answer += this.getAttribute('data-value');
+                        document.getElementById('display-answer').innerText = answer;
+                        document.getElementById('digit-answer').value = answer;
+                    });
+                });
+
+                // Handling delete button
+                document.getElementById('delete-button').addEventListener('click', function() {
+                    answer = answer.slice(0, -1);
+                    document.getElementById('display-answer').innerText = answer;
+                    document.getElementById('digit-answer').value = answer;
+                });
+
+                // Start countdown if timeLeft is available
+                @if ($timeLeft)
+                    updateCountdown();
+                @endif
+            </script>
         @endif
+
+
+
     </div>
 @endsection

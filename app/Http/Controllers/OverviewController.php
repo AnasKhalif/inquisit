@@ -18,6 +18,25 @@ class OverviewController extends Controller
         return Excel::download(new ParticipantAnswerExport($categoryId, $participantId), 'jawaban_participant.xlsx');
     }
 
+    // public function exportPdf($categoryId, $participantId)
+    // {
+    //     // Ambil data kategori berdasarkan ID
+    //     $category = Category::findOrFail($categoryId);
+
+    //     // Ambil data peserta berdasarkan ID
+    //     $participant = Participant::findOrFail($participantId);
+
+    //     // Ambil hanya jawaban yang relevan dengan kategori dan peserta
+    //     $answers = $participant->answers()->whereHas('question', function ($query) use ($categoryId) {
+    //         $query->where('category_id', $categoryId);
+    //     })->get();
+
+    //     // Generate PDF dari view yang sudah ada
+    //     $pdf = PDF::loadView('overview.pdf', compact('category', 'participant', 'answers'));
+
+    //     // Men-download PDF
+    //     return $pdf->stream('jawaban_participant.pdf');
+    // }
     public function exportPdf($categoryId, $participantId)
     {
         // Ambil data kategori berdasarkan ID
@@ -31,12 +50,34 @@ class OverviewController extends Controller
             $query->where('category_id', $categoryId);
         })->get();
 
+        $previousTime = null;
+
+        // Menghitung selisih waktu respon dan menambahkan ke $answer
+        foreach ($answers as $key => $answer) {
+
+            if ($answer->waktu_respon < 0) {
+                $answer->waktu_respon = 0;
+            }
+
+            if ($previousTime === null) {
+                // Jawaban pertama, set timeDifference dengan waktu respon pertama
+                $answer->timeDifference = $answer->waktu_respon;
+            } else {
+                // Selisih antara waktu jawaban sekarang dan jawaban sebelumnya
+                $answer->timeDifference = $answer->waktu_respon - $previousTime;
+            }
+
+            // Update previousTime untuk perhitungan selanjutnya
+            $previousTime = $answer->waktu_respon;
+        }
+
         // Generate PDF dari view yang sudah ada
         $pdf = PDF::loadView('overview.pdf', compact('category', 'participant', 'answers'));
 
         // Men-download PDF
         return $pdf->stream('jawaban_participant.pdf');
     }
+
 
     public function index(Request $request)
     {
@@ -70,6 +111,11 @@ class OverviewController extends Controller
 
         // Menghitung selisih waktu respon
         foreach ($answers as $key => $answer) {
+
+            if ($answer->waktu_respon < 0) {
+                $answer->waktu_respon = 0;
+            }
+
             if ($previousTime === null) {
                 // Jawaban pertama, set timeDifference dengan waktu respon pertama
                 $answer->timeDifference = $answer->waktu_respon;

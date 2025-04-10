@@ -131,6 +131,11 @@
 
             <p class="text-lg mt-8">Waktu mulai dalam:</p>
             <div id="countdown" class="text-4xl font-bold text-red-500 mt-4"></div>
+        @elseif ($category->id == 4)
+            <h2 class="text-4xl font-bold mb-6">Instruksi - Mental Stress</h2>
+
+            <p class="text-lg mt-8">Waktu mulai dalam:</p>
+            <div id="countdown" class="text-4xl font-bold text-red-500 mt-4"></div>
         @endif
 
         <script>
