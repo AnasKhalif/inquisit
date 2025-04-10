@@ -132,7 +132,67 @@
             <p class="text-lg mt-8">Waktu mulai dalam:</p>
             <div id="countdown" class="text-4xl font-bold text-red-500 mt-4"></div>
         @elseif ($category->id == 4)
+            <!-- Mental Stress category -->
             <h2 class="text-4xl font-bold mb-6">Instruksi - Mental Stress</h2>
+
+            <p class="text-lg mt-8 leading-relaxed">
+                Pada kategori ini, Anda akan mengerjakan beberapa soal matematika yang berbeda tingkat kesulitannya.
+                Tugas Anda adalah menjawab soal-soal ini sesuai dengan instruksi yang diberikan. Di setiap fase,
+                Anda akan melihat foto berbeda yang berhubungan dengan soal yang akan dikerjakan. Setiap fase memiliki
+                perbedaan dalam hal waktu dan jenis soal yang diberikan.
+            </p>
+
+            <!-- Fase Training -->
+            <h3 class="text-2xl font-semibold mt-8">Fase Training</h3>
+            <p class="text-lg mt-4">
+                Pada fase <strong>Training</strong>, Anda tidak akan dibatasi oleh waktu. Tujuan dari fase ini adalah
+                untuk mempersiapkan Anda dalam menjawab soal dengan berbagai tingkat kesulitan. Anda akan melihat soal
+                matematika sederhana yang bertujuan untuk melatih kemampuan Anda dalam mengerjakan soal dengan benar.
+            </p>
+            <p class="text-lg mt-4">Foto untuk Fase Training:</p>
+            <div class="flex justify-center mt-4">
+                <img src="{{ asset('assets/images/trainingdancontrol.jpeg') }}" alt="Training Image" class="w-64">
+            </div>
+            <p class="text-lg mt-4">
+                Pada fase ini, Anda hanya perlu fokus pada soal dan jawaban yang benar. Tidak ada waktu yang dihitung
+                dalam fase ini.
+            </p>
+
+            <!-- Fase Eksperimental -->
+            <h3 class="text-2xl font-semibold mt-8">Fase Eksperimental</h3>
+            <p class="text-lg mt-4">
+                Pada fase <strong>Eksperimental</strong>, soal yang diberikan akan lebih menantang dan Anda akan
+                dibatasi
+                oleh waktu. Fase ini bertujuan untuk menguji tingkat stres Anda saat mengerjakan soal matematika dalam
+                waktu terbatas.
+            </p>
+            <p class="text-lg mt-4">Foto untuk Fase Eksperimental:</p>
+            <div class="flex justify-center mt-4">
+                <img src="{{ asset('assets/images/eksperimental.jpeg') }}" alt="Eksperimental Image" class="w-64">
+            </div>
+            <p class="text-lg mt-4">
+                Di fase ini, waktu Anda akan dihitung, dan Anda perlu menyelesaikan soal dengan secepat mungkin.
+                Waktu yang tersisa akan terus berkurang, dan ketika waktu habis, soal akan selesai otomatis.
+            </p>
+
+            <!-- Fase Control -->
+            <h3 class="text-2xl font-semibold mt-8">Fase Control</h3>
+            <p class="text-lg mt-4">
+                Pada fase <strong>Control</strong>, soal yang diberikan akan serupa dengan fase Training, namun Anda
+                juga
+                akan melihat foto yang sama seperti pada fase Training. Fase ini digunakan untuk mengontrol level stres
+                Anda
+                dengan memberikan soal yang tidak memerlukan waktu, sehingga lebih fokus pada akurasi jawaban.
+            </p>
+            <p class="text-lg mt-4">Foto untuk Fase Control:</p>
+            <div class="flex justify-center mt-4">
+                <img src="{{ asset('assets/images/trainingdancontrol.jpeg') }}" alt="Training and Control Image"
+                    class="w-64">
+            </div>
+            <p class="text-lg mt-4">
+                Pada fase ini, tidak ada tekanan waktu. Anda akan diberikan kesempatan untuk menyelesaikan soal-soal
+                dengan tenang dan hati-hati.
+            </p>
 
             <p class="text-lg mt-8">Waktu mulai dalam:</p>
             <div id="countdown" class="text-4xl font-bold text-red-500 mt-4"></div>

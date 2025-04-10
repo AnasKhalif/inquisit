@@ -286,63 +286,6 @@
 
                 showDigit();
             </script>
-            {{-- @elseif($category->id == 4)
-            <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">Soal - {{ $category->kategori }} - Phase:
-                {{ ucfirst($currentQuestion->phase) }}</h2>
-
-            <div class="mt-4 p-4 text-center">
-                <p id="question-text" class="text-4xl font-semibold">{{ $currentQuestion->pertanyaan }}</p>
-                <div id="feedback" class="text-lg font-bold mt-4"></div>
-            </div>
-
-            <form
-                action="{{ route('test.storeAnswer', ['participantId' => $participant->id, 'categoryId' => $category->id, 'questionId' => $currentQuestion->id]) }}"
-                method="POST" id="answer-form">
-                @csrf
-                <div class="text-center">
-
-                    <div id="display-answer" class="text-6xl font-bold text-center">
-                    </div>
-
-                    <div id="calculator"
-                        class="grid grid-cols-5 gap-4 mt-6 justify-center items-center max-w-[500px] mx-auto">
-                        @for ($i = 1; $i <= 9; $i++)
-                            <button type="button"
-                                class="calc-button bg-black text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out"
-                                data-value="{{ $i }}">{{ $i }}</button>
-                        @endfor
-                        <button type="button" id="delete-button"
-                            class="bg-red-600 text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out">
-                            Del
-                        </button>
-                    </div>
-
-                    <input type="hidden" name="answer" id="digit-answer" />
-                </div>
-
-                <input type="hidden" name="time_left" id="time_left" value="{{ $timeLeft }}">
-                <button type="submit" class="bg-[#2E6638] text-white px-6 py-2 mt-4 rounded-lg">Kirim Jawaban</button>
-            </form>
-
-
-            <script>
-                let answer = '';
-                document.querySelectorAll('.calc-button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        answer += this.getAttribute('data-value');
-                        document.getElementById('display-answer').innerText = answer;
-                        document.getElementById('digit-answer').value =
-                            answer;
-                    });
-                });
-
-                document.getElementById('delete-button').addEventListener('click', function() {
-                    answer = answer.slice(0, -1);
-                    document.getElementById('display-answer').innerText = answer;
-                    document.getElementById('digit-answer').value = answer;
-                });
-            </script>
-        @endif --}}
         @elseif($category->id == 4)
             <h2 class="text-4xl font-bold text-gray-800 mb-6 text-center">
                 Soal - {{ $category->kategori }} - Phase: {{ ucfirst($currentQuestion->phase) }}
@@ -437,8 +380,35 @@
                 @endif
             </script>
         @endif
-
-
-
     </div>
+    <button onclick="confirmExit()" class="text-red-600 text-6xl">
+        X
+    </button>
+
+    <!-- Hidden confirmation popup -->
+    <div id="confirmation-popup"
+        style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <p class="text-lg font-semibold">Yakin ingin keluar ke dashboard?</p>
+        <button onclick="exitToDashboard()" class="bg-red-600 text-white px-6 py-2 mt-4 rounded-lg">Ya, Keluar</button>
+        <button onclick="closePopup()" class="bg-gray-300 text-black px-6 py-2 mt-4 rounded-lg">Batal</button>
+    </div>
+
+    <script>
+        // Function to show the confirmation popup
+        function confirmExit() {
+            document.getElementById('confirmation-popup').style.display = 'block';
+        }
+
+        // Function to hide the confirmation popup
+        function closePopup() {
+            document.getElementById('confirmation-popup').style.display = 'none';
+        }
+
+        // Function to perform the redirection to the dashboard
+        function exitToDashboard() {
+            window.location.href = "{{ route('dashboard') }}"; // Replace with the correct route for your dashboard
+        }
+    </script>
+
+
 @endsection
