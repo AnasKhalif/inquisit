@@ -36,7 +36,7 @@ jobs:
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
       - name: Sleep for 30 seconds to avoid conflicts with container restart
-        run: sleep 30
+        run: sleep 60
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
