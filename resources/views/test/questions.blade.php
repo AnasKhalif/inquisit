@@ -308,7 +308,7 @@
                     <!-- Calculator buttons -->
                     <div id="calculator"
                         class="grid grid-cols-5 gap-4 mt-6 justify-center items-center max-w-[500px] mx-auto">
-                        @for ($i = 1; $i <= 9; $i++)
+                        @for ($i = 0; $i <= 9; $i++)
                             <button type="button"
                                 class="calc-button bg-black text-white border border-gray-700 p-4 text-2xl rounded-lg hover:bg-gray-800 active:bg-gray-900 transition duration-200 ease-in-out"
                                 data-value="{{ $i }}">{{ $i }}</button>
