@@ -113,6 +113,19 @@ class TestController extends Controller
             ->where('id', '>', $questionId)
             ->first();
 
+        // if ($nextQuestion) {
+        //     return redirect()->route('test.questions', [
+        //         'participantId' => $participantId,
+        //         'categoryId' => $categoryId,
+        //         'questionId' => $nextQuestion->id
+        //     ]);
+        // } else {
+        //     return redirect()->route('test.relax', [
+        //         'participantId' => $participantId,
+        //         'categoryId' => $categoryId
+        //     ]);
+        // }
+
         if ($nextQuestion) {
             return redirect()->route('test.questions', [
                 'participantId' => $participantId,
@@ -120,10 +133,8 @@ class TestController extends Controller
                 'questionId' => $nextQuestion->id
             ]);
         } else {
-            return redirect()->route('test.relax', [
-                'participantId' => $participantId,
-                'categoryId' => $categoryId
-            ]);
+            // setelah soal terakhir → tampilkan form effort
+            return view('test.effort', compact('participantId', 'categoryId'));
         }
     }
 
@@ -183,5 +194,23 @@ class TestController extends Controller
         } else {
             return redirect()->route('dashboard')->with('success', 'Tes selesai!');
         }
+    }
+
+    public function storeEffort(Request $request, $participantId, $categoryId)
+    {
+        $request->validate([
+            'effort' => 'required|integer|min:0|max:10',
+        ]);
+
+        // Update effort di tabel participant_choices
+        ParticipantChoice::where('participant_id', $participantId)
+            ->where('category_id', $categoryId)
+            ->update(['effort' => $request->effort]);
+
+        // Setelah simpan → ke halaman relax
+        return redirect()->route('test.relax', [
+            'participantId' => $participantId,
+            'categoryId' => $categoryId
+        ]);
     }
 }

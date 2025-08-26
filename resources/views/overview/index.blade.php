@@ -14,6 +14,7 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Nama</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Kategori Tes</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Effort</th>
                     <th class="px-6 py-3 text-center text-sm font-medium text-gray-600">Aksi</th>
                 </tr>
             </thead>
@@ -27,6 +28,13 @@
                                     class="inline-block bg-[#e9ecf2] text-brown text-[13px] font-bold py-1 px-3 rounded-full mr-2 mb-2">
                                     {{ $choice->category->kategori }}
                                 </a>
+                            @endforeach
+                        </td>
+                        <td class="px-6 py-4 text-sm">
+                            @foreach ($participant->choices as $choice)
+                                <span class="inline-block mr-2">
+                                    {{ $choice->effort }}
+                                </span>
                             @endforeach
                         </td>
                         <td class="px-6 py-4 text-center">

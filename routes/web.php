@@ -32,3 +32,5 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 // Route untuk mengedit kategori
 Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+
+Route::post('/test/effort/{participantId}/{categoryId}', [TestController::class, 'storeEffort'])->name('test.storeEffort');
