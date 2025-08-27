@@ -3,7 +3,7 @@
 @section('content')
     <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-8 text-center">
         <h2 class="text-2xl font-bold mb-4">Seberapa banyak Anda perlu berpikir atau berkonsentrasi untuk menyelesaikan
-            kategori ini?</h2>
+            kategori <span class="font-semibold">{{ $category->kategori }}</span>?</h2>
         <p class="text-lg mb-6">Pilih rentang dari 0 (rendah) sampai 10 (tinggi).</p>
 
         <form action="{{ route('test.storeEffort', ['participantId' => $participantId, 'categoryId' => $categoryId]) }}"

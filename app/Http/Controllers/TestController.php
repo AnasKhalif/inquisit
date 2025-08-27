@@ -133,8 +133,9 @@ class TestController extends Controller
                 'questionId' => $nextQuestion->id
             ]);
         } else {
+
             // setelah soal terakhir → tampilkan form effort
-            return view('test.effort', compact('participantId', 'categoryId'));
+            return view('test.effort', compact('participantId', 'categoryId'))->with('category', $category);
         }
     }
 
