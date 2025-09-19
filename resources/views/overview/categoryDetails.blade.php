@@ -3,6 +3,10 @@
 @section('content')
     <div class="overflow-x-auto mt-6 font-poppins">
         <h2 class="text-xl font-semibold mb-4 text-center">Jawaban Peserta untuk Kategori: {{ $category->kategori }}</h2>
+        <div class="mb-4 flex justify-center gap-6">
+            <span class="px-4 py-2 text-green rounded">Total Benar: {{ $totalBenar }}</span>
+            <span class="px-4 py-2 text-red-800 rounded">Total Salah: {{ $totalSalah }}</span>
+        </div>
         <a href="{{ route('overview.export', ['categoryId' => $category->id, 'participantId' => $participant->id]) }}"
             class="px-4 py-2 bg-blue text-white rounded-md mb-4 inline-block">
             Export Excel

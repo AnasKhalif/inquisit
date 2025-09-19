@@ -128,7 +128,10 @@ class OverviewController extends Controller
             $previousTime = $answer->waktu_respon;
         }
 
+        $totalBenar = $answers->where('benar_salah', 'benar')->count();
+        $totalSalah = $answers->where('benar_salah', 'salah')->count();
 
-        return view('overview.categoryDetails', compact('category', 'participant', 'answers'));
+
+        return view('overview.categoryDetails', compact('category', 'participant', 'answers', 'totalBenar', 'totalSalah'));
     }
 }
