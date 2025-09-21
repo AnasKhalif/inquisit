@@ -18,7 +18,7 @@
                 @csrf
                 <div class="mt-4 p-4 text-center">
                     @if ($currentQuestion->kategori_soal == 'Control')
-                        <div class="w-16 h-16 mx-auto {{ $currentQuestion->warna_display }}"></div>
+                        <div class="w-16 h-16 mx-auto {{ $currentQuestion->warna_display ?? 'bg-sky-500' }}"></div>
                         <div id="feedback" class="text-lg font-bold mt-4"></div>
                     @else
                         <p id="question-text" class="text-4xl font-semibold {{ $currentQuestion->warna_display }}">
