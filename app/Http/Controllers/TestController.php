@@ -46,23 +46,33 @@ class TestController extends Controller
         $participant = Participant::findOrFail($participantId);
         $category = Category::findOrFail($categoryId);
 
-        $questions = Question::where('category_id', $categoryId)->get();
+        // Ambil urutan soal acak dari session, jika belum ada acak dan simpan
+        $questionOrderKey = 'question_order_' . $participantId . '_' . $categoryId;
+        $questionOrder = session($questionOrderKey);
+        if (!$questionOrder) {
+            $questions = Question::where('category_id', $categoryId)->get()->shuffle();
+            $questionOrder = $questions->pluck('id')->toArray();
+            session([$questionOrderKey => $questionOrder]);
+        } else {
+            $questions = Question::whereIn('id', $questionOrder)->get()->sortBy(function ($q) use ($questionOrder) {
+                return array_search($q->id, $questionOrder);
+            });
+        }
 
-        if ($questionId === null && $questions->isNotEmpty()) {
-            $questionId = $questions->first()->id;
+        // Tentukan soal saat ini
+        if ($questionId === null && count($questionOrder) > 0) {
+            $questionId = $questionOrder[0];
         }
 
         $currentQuestion = Question::findOrFail($questionId);
 
         if ($category->id == 4 && $currentQuestion->phase == 'experimental') {
-            // Untuk fase eksperimental, ambil waktu dari kategori Aritmatika
             $timeLeft = $category->waktu;
         } else if ($category->id == 4 && $currentQuestion->phase == 'control') {
             $timeLeft = 0;
         } else if ($category->id == 4 && $currentQuestion->phase == 'training') {
             $timeLeft = 0;
         } else {
-            // Untuk fase training atau control, tidak perlu waktu
             $timeLeft = $category->waktu;
         }
 
@@ -108,32 +118,19 @@ class TestController extends Controller
             'waktu_respon' => $timeSpent,  // Waktu yang digunakan
         ]);
 
-        // Ambil soal berikutnya
-        $nextQuestion = Question::where('category_id', $categoryId)
-            ->where('id', '>', $questionId)
-            ->first();
+        // Ambil urutan soal dari session
+        $questionOrderKey = 'question_order_' . $participantId . '_' . $categoryId;
+        $questionOrder = session($questionOrderKey, []);
+        $currentIndex = array_search($questionId, $questionOrder);
+        $nextQuestionId = $questionOrder[$currentIndex + 1] ?? null;
 
-        // if ($nextQuestion) {
-        //     return redirect()->route('test.questions', [
-        //         'participantId' => $participantId,
-        //         'categoryId' => $categoryId,
-        //         'questionId' => $nextQuestion->id
-        //     ]);
-        // } else {
-        //     return redirect()->route('test.relax', [
-        //         'participantId' => $participantId,
-        //         'categoryId' => $categoryId
-        //     ]);
-        // }
-
-        if ($nextQuestion) {
+        if ($nextQuestionId) {
             return redirect()->route('test.questions', [
                 'participantId' => $participantId,
                 'categoryId' => $categoryId,
-                'questionId' => $nextQuestion->id
+                'questionId' => $nextQuestionId
             ]);
         } else {
-
             // setelah soal terakhir → tampilkan form effort
             return view('test.effort', compact('participantId', 'categoryId'))->with('category', $category);
         }

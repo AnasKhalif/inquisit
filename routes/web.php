@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OverviewController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -34,3 +35,9 @@ Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 
 Route::post('/test/effort/{participantId}/{categoryId}', [TestController::class, 'storeEffort'])->name('test.storeEffort');
+
+Route::get('/reseeder', function () {
+    // Jalankan migrate:fresh --seed
+    \Artisan::call('migrate:fresh', ['--seed' => true]);
+    return 'Database has been reset and reseeded!';
+})->name('reseeder');
